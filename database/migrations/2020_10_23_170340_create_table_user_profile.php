@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTableRealState extends Migration
+class CreateTableUserProfile extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,13 @@ class CreateTableRealState extends Migration
      */
     public function up()
     {
-        Schema::create('real_state', function (Blueprint $table) {
+        Schema::create('user_profile', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
-            $table->string('title');
-            $table->string('description');
-            $table->text('content');
-            $table->float('price', 10, 2);
-            $table->integer('bathrooms');
-            $table->integer('bedrooms');
-            $table->integer('property_area');
-            $table->integer('total_property_area');
-            $table->string('slug');
+            $table->text('about')->nullable(true);
+            $table->text('social_networks')->nullable(true);
+            $table->string('phone');
+            $table->string('mobile_phone');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
@@ -38,6 +33,6 @@ class CreateTableRealState extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('real_state');
+        Schema::dropIfExists('user_profile');
     }
 }
